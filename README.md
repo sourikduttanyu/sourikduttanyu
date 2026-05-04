@@ -1,47 +1,62 @@
 <div align="center">
   <h1>Hi, I'm Sourik Dutta 👋</h1>
-  <h3>Software Engineer | MS in Computer Science @ NYU</h3>
+  <h3>Software Engineer | Agentic AI & Distributed Systems | MS CS @ NYU</h3>
 </div>
 
-I am a Software Engineer focused on building distributed backend systems and real-time data pipelines at a millions-user scale, maintaining 99.86% SLA across thousands of concurrent requests. I am currently pursuing my Master's in Computer Science at New York University. My active development centers around high-throughput infrastructure, serverless architecture, and LLM-powered applications.
+Software Engineer with 2+ years building distributed backend systems, real-time data pipelines, and production agentic AI systems at millions-user scale — sustaining 99.86% SLO across thousands of concurrent requests. Currently pursuing my Master's in Computer Science at New York University. My active development centers around multi-agent LLM orchestration, high-throughput infrastructure, and LLMOps observability.
 
 ---
 
 ### 🛠 Technical Arsenal
 
-* **Core Languages:** Python, Java, C++, C#, Go, JavaScript, TypeScript, SQL, Bash.
-* **Cloud & Data Infrastructure:** Azure, AWS, GCP, Docker, Kubernetes (AKS), Apache Kafka, Apache Spark, Redis, PostgreSQL, MongoDB, Terraform.
-* **AI / ML & GenAI Tooling:** RAG Pipelines, Prompt Engineering, Amazon SageMaker, AIOps (Z-Score/EWMA Anomaly Detection), NLP.
-* **Frameworks & Architecture:** Java Spring Boot, .NET, REST APIs, OAuth 2.0, RBAC, LangChain, FastAPI, Flask, GraphQL, Resilience4j.
+* **Core Languages:** Python, Go, Java, C++, C#, TypeScript, JavaScript, SQL, Bash
+* **Agentic AI & LLMOps:** LangGraph, LangChain, LangSmith, MCP (Model Context Protocol), RAG Pipelines, Multi-agent Orchestration, Human-in-the-loop, ReAct Patterns, Eval Pipelines, Ragas, Prompt Engineering
+* **LLM APIs & Tooling:** Claude API, OpenAI API, Gemini API (Vertex AI), Amazon Lex, Pinecone, pgvector, Semgrep, AI-assisted Dev (Claude Code, Cursor, Codex)
+* **Cloud & Data Infrastructure:** GCP (Vertex AI, Cloud Run, Cloud Build), AWS (Lambda, SageMaker, EKS, DynamoDB, OpenSearch), Azure (AKS, Event Hubs, API Management, CosmosDB, SignalR), Docker, Kubernetes, Kafka, Spark, TimescaleDB, PostgreSQL, Redis, Terraform, Helm
+* **Frameworks & Architecture:** FastAPI, Java Spring Boot, .NET, React, Angular, REST APIs, WebSocket, SSE, OAuth 2.0, JWT RS256, RBAC, LangChain, Flask, Resilience4j
+* **DevSecOps & Platform:** GitHub Actions, CI/CD, Prometheus, Semgrep, Gitleaks, SonarQube, SAST, FinOps, SLO Ownership, DRI, Incident Response
 
 ---
 
 ### 🚀 Featured Engineering Case Studies
 
-**[RouteSavvy — Urban Mobility Optimizer](https://github.com/sourikduttanyu/routesavvy-bigdata-project)** | *PySpark, Apache Kafka, MongoDB, Flask, Docker*
-* Engineered a distributed real-time data platform processing 112M+ daily signals with under 2 dropped events to compute per-station mobility scores across NYC.
-* Sustained 99.87% system stability across 8,432 hours of continuous stream analysis using a fault-tolerant Kafka and PySpark Structured Streaming pipeline.
+**[Sentinel — Agentic PR Review System](https://github.com/sourikduttanyu/Sentinel)** | *Python · LangGraph 1.1 · LangSmith · Claude API · Gemini API · Semgrep · MCP Server · FastAPI · Prometheus · GCP Cloud Run*
 
-**[FeastFleet — Serverless Platform](https://github.com/sourikduttanyu/FeastFleetDeliveryApp)** | *AWS Lambda, DynamoDB, OpenSearch, SageMaker, Lex*
-* Migrated from a monolithic dispatch architecture to a fault-tolerant serverless AWS Lambda system with MLOps-aligned CI/CD and production telemetry monitoring.
-* Reduced order processing latency by 43% for 1,248 concurrent users.
-* Built autonomous order routing via LangChain RAG pipelines, integrating Claude and OpenAI APIs for failure prediction and demand forecasting.
+* Engineered a LangGraph multi-agent system with SecurityAgent (Semgrep + Claude), DocsAgent, and PerformanceAgent running in parallel — SupervisorAgent implements hierarchical delegation and ReAct reasoning loops resolving cross-agent conflicts, with LangSmith per-node tracing and SqliteSaver checkpointing surviving server restarts.
+* Built agent eval harness via Ragas scoring finding precision, false-positive rate, and cost-per-review across Claude Haiku and Gemini 1.5 Flash — reducing raw Semgrep findings from 6 to 4-5 high-confidence issues, catching 1 RCE vulnerability Semgrep missed, at $0.016/review (~7,500 tokens).
+* Exposed Sentinel as an MCP server with review_pr, get_findings, and approve_review tools — enabling Claude and Gemini to natively orchestrate PR review workflows, deployed on GCP Cloud Run with Cloud Build CI/CD.
 
-**[go-pubsub-broker](https://github.com/sourikduttanyu/go-pubsub-broker)** | *Go, Goroutines, Channels, RWMutex, Dead-Letter Queue*
-* Engineered a lightweight in-memory pub/sub broker implementing at-least-once delivery, configurable retries, and a dead-letter queue.
-* Sustained 1.54M msg/sec on a single subscriber using goroutine-per-subscription concurrency and RWMutex safety.
-* Built a live TUI observability dashboard via Bubbletea with real-time ACK/NACK/DLQ visualizations, achieving linear O(subs) fan-out scaling.
+**[go-pubsub-server](https://github.com/sourikduttanyu/go-pubsub-broker)** | *Go · Goroutines · RWMutex · REST API · WebSocket · PostgreSQL · Prometheus · Bearer Auth · Rate Limiting*
+
+* Engineered a production pub/sub broker and HTTP server in Go with goroutine-per-subscription fan-out, RWMutex concurrency safety, and per-attempt isolated handler goroutines — benchmarked at 1.54M msg/sec with linear O(subs) fan-out scaling confirmed across 1–100 subscribers.
+* Exposed REST and WebSocket API with Bearer token auth, per-API-key token bucket rate limiting, optional PostgreSQL persistence via store interface abstraction, Prometheus metrics, and a Go client SDK mirroring the cloud.google.com/go/pubsub interface — race detector clean.
+
+**[Chronos Pipeline](https://github.com/sourikduttanyu/Chronos_Pipeline)** | *Python · FastAPI · asyncpg · TimescaleDB · PostgreSQL · Redis · WebSocket · SSE · JWT RS256 · Docker*
+
+* Built a production IoT ingestion and query platform in FastAPI and asyncpg on TimescaleDB — sensor_readings as a hypertable with 7-day chunk compression, continuous aggregate daily_stats for constant-time /stats queries, and Redis caching across /readings (60s TTL) and /stats (300s TTL) with graceful degradation on cache miss.
+* Engineered JWT RS256 auth with Redis-backed refresh token rotation, per-token rate limiting via slowapi, and dual real-time streaming via WebSocket and SSE — RBAC viewer and admin roles, audit middleware, and 80 passing tests across auth, ingest, and cache invalidation.
+
+**[FeastFleet — Autonomous AI Platform](https://github.com/sourikduttanyu/FeastFleetDeliveryApp)** | *Python · LangChain · RAG · Claude API · OpenAI API · Gemini API · Amazon Lex · AWS Lambda · SageMaker · DynamoDB · OpenSearch*
+
+* Built autonomous order routing via LangChain RAG pipelines integrating Claude and OpenAI APIs — agents autonomously decide rerouting triggers, carrier failover, and demand surge responses in real time via Amazon Lex, delivering measurable ROI through 43% latency reduction and reusable agentic workflow modules.
+* Reduced order processing latency 43% for 1,248 concurrent users by migrating monolithic dispatch to fault-tolerant serverless AWS Lambda with SageMaker-backed ML inference, MLOps-aligned CI/CD, evals instrumentation, and production telemetry monitoring.
+
+**[RouteSavvy — Urban Mobility Optimizer](https://github.com/sourikduttanyu/routesavvy-bigdata-project)** | *Kafka · PySpark · C++ · Python · Docker · Distributed Systems*
+
+* Engineered a fault-tolerant Kafka and PySpark pipeline processing 112M+ daily MTA signals with under 2 dropped events per million, sustaining throughput across route outputs, delay predictions, and busy-station anomaly alerts across a full semester.
+* Achieved 99.87% SLO across 112M+ daily events by architecting Dockerized distributed infrastructure with low-latency C++ concurrency optimizations, automated CI/CD, and observability instrumentation with zero manual intervention across 12 weeks.
 
 ---
 
 ### 📈 Platform Maturity & Engineering Rigor
 
-Beyond shipping features, I build systems focused on reliability, cost-efficiency, and strict security postures:
+Beyond shipping features, I build systems focused on reliability, observability, and strict security postures:
 
-* **Performance Engineering:** Sustained sub-100ms p95 latency under millions of enterprise API requests by profiling .NET hot paths and eliminating GC pressure via `Span<T>` and `ArrayPool<T>`.
-* **FinOps & Cloud Architecture:** Cut Azure infrastructure costs by 18% over 3 months by running Databricks Spark analytics on Cost Analysis exports to identify over-provisioned VMs and right-sizing them via Terraform.
-* **DevSecOps & Shift-Left Security:** Drove SAST critical findings to zero and raised unit test coverage by 21% by engineering GitHub Actions pipelines with Semgrep SAST gates and Gitleaks secrets scanning.
-* **AIOps & Observability:** Reduced mean time to detection across 3 production services by building an AIOps telemetry pipeline with Z-Score and EWMA anomaly detection as containerized Azure inference microservices.
+* **Agentic AI & LLMOps:** Built production multi-agent systems with LangGraph, LangSmith end-to-end tracing, Ragas eval harnesses, and Prometheus LLMOps metrics — tracking cost-per-request, false-positive rate, and quality drift across Claude and Gemini backends.
+* **Performance Engineering:** Sustained sub-100ms p95 latency under millions of enterprise API requests by profiling .NET hot paths and eliminating GC pressure via `Span<T>` and `ArrayPool<T>`. Benchmarked Go pub/sub broker at 1.54M msg/sec with linear fan-out scaling.
+* **FinOps & Cloud Architecture:** Cut Azure infrastructure costs 18% over 3 months by running Databricks Spark analytics on Cost Analysis exports, right-sizing VMs via Terraform and configuring VMSS autoscaling — CI/CD velocity improved 27%.
+* **DevSecOps & Shift-Left Security:** Drove SAST critical findings to zero and raised unit test coverage 21% by engineering GitHub Actions pipelines with Semgrep SAST gates, Gitleaks secrets scanning, and SonarQube enforcement — golden-path template adopted by 4 additional service teams.
+* **AIOps & Observability:** Reduced mean time to detection across 3 production services by building an AIOps telemetry pipeline with Z-Score and EWMA anomaly detection — instrumenting per-model latency, token usage, and detection accuracy with automated pre-escalation routing.
 
 ---
 
